@@ -26,9 +26,9 @@ for item in tqdm(df):
         a = stats.pearsonr(X,Y)
 
 
-        if str([item,listt[i],listt[i+1]]) not in dictionary:
-            dictionary[str([item,listt[i],listt[i+1]])]=[]
-        dictionary[str([item,listt[i],listt[i+1]])] = a[0]
+        if str([item,listt[i]]) not in dictionary:
+            dictionary[str([item,listt[i]])]=[]
+        dictionary[str([item,listt[i]])] = a[0]
         #print(dictionary[str([item,i])] )
         j = j+1
 
