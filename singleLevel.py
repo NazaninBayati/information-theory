@@ -6,7 +6,6 @@ from pyitlib import discrete_random_variable as drv
 
 class singleLevel:
     def MI(self,df):
-        dictionary = {}
         result = 0.00
         listt = df.keys()
         for item in (df):
@@ -59,6 +58,27 @@ class singleLevel:
 
         return result
 
+    def PCC_SF(self,df):
+
+        result = 0.00
+        listt = df.keys()
+        for item in (df):
+            j = 1
+            for i in listt[j:listt.__len__() - 1]:
+                X = df[item].values
+                Y = df[i].values
+                result = result + sum(stats.pearsonr(X, Y))
+        return result
+
+    def PCC(self,NS_item,df):
+        result = 0.00
+
+        for item in df:
+
+            X = NS_item.values
+            Y = df[item].values
+            result = result + sum(stats.pearsonr(X, Y))
+        return result
 
     def entropy(self,df):
 
