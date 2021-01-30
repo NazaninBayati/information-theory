@@ -2,6 +2,7 @@ from scipy import stats
 from scipy.io import arff
 import pandas as pd
 from tqdm import tqdm
+from pyitlib import discrete_random_variable as drv
 
 class singleLevel:
     def MI(self,df):
@@ -12,6 +13,7 @@ class singleLevel:
             j = 1
             for i in listt[j:listt.__len__() - 1]:
 
+                """
                 data1 = df[item]
                 data2 = df[i]
                 pd_series_H1 = pd.Series(data1)
@@ -26,7 +28,37 @@ class singleLevel:
                 result = result + entropy_H1 + entropy_H2 - entropy
                 # print(dictionary[str([item,i])] )
                 j = j + 1
+                """
+                X = df[item].values
+                Y = df[i].values
+                result = result + drv.information_mutual(X, Y)
         return result
+
+    def notselectedMI(self,NS_item,df):
+        result = 0.00
+
+        for i in df:
+            """
+            data1 = NS_item
+            data2 = df[i]
+            
+            pd_series_H1 = pd.Series(data1)
+            pd_series_H2 = pd.Series(data2)
+            pd_series = pd.Series(data1, data2)
+            counts_H1 = pd_series_H1.value_counts()
+            counts_H2 = pd_series_H2.value_counts()
+            counts = pd_series.value_counts()
+            entropy_H1 = stats.entropy(counts_H1 / sum(counts_H1), base=2)
+            entropy_H2 = stats.entropy(counts_H2 / sum(counts_H2), base=2)
+            entropy = stats.entropy(counts / sum(counts), base=2)
+            result = result + entropy_H1 + entropy_H2 - entropy
+            """
+            X = NS_item.values
+            Y = df[i].values
+            result = result + drv.information_mutual(X, Y)
+
+        return result
+
 
     def entropy(self,df):
 
