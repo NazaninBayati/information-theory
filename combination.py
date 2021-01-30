@@ -13,11 +13,11 @@ class combination:
         # formula 2
         return singleLevel.notselectedMI(self,NS_item,key_df)
     #return singleLevel.MI(self,self.df)/notselected features = 1
-    """
-    def avdSD(self,x,N):
+
+    def avdSD(self,df):
         # formula 3
-        return math.sd(x) / N-1
-    """
+        return df.std() / 39
+
     def entropyandSD(self,x):
         # formula 4
         return singleLevel.entropy(self,x)/39
@@ -26,11 +26,15 @@ class combination:
         return N*(N-1)/2*IG(x,y)
     def IG2(self,x,y,N):
         return IG(x,y)/notselected=1
-    def P1_MIandPCC(self,x,y,N):
-        return N*(N-1)/2*PCC(x,y)
-    def P2_MIandPCC(self,x,y,N):
-        return PCC(x,y)/notselected = 1
-        """
+    """
+    def P1_MIandPCC(self,df):
+        return (39*38)/ (2* singleLevel.PCC_SF(self,df))
+
+    def P2_MIandPCC(self,NS_item,df):
+        return singleLevel.PCC(self,NS_item,df)
+        #return PCC(x,y)/notselected = 1
+    
+
 
     def reader(self):
         data = arff.loadarff('Training Dataset original.arff')
@@ -57,6 +61,7 @@ class combination:
             b = self.df[a]
             key_df.drop([self.df.keys()[item]],axis=1,inplace=True)
             entropy = combination.entropyandSD(self,key_df)
+            avgSTD = combination.avdSD(self,key_df)
             key_df[a] = b
 
 
@@ -66,7 +71,9 @@ class combination:
             y = self.csvdf[x]
             csv_df.drop([self.csvdf.keys()[item]], axis=1, inplace=True)
             Mutualinformation_SD = combination.MIandSD(self, csv_df)
+            Mutualinformation_PCC1 = combination.P1_MIandPCC(self, csv_df)
             AverageMutualinofrmation = combination.avgnormalMI(self, y, csv_df)
+            Mutualinformation_PCC2 = combination.P2_MIandPCC(self,  y, csv_df)
             print(Mutualinformation_SD)
             csv_df[x] = y
 
