@@ -6,8 +6,23 @@ from pyitlib import discrete_random_variable as drv
 
 class singleLevel:
 
-    def IG(self,parent_entropy,df):
+    def IG_SF(self,df):
 
+        result = 0.00
+        listt = df.keys()
+        for item in (df):
+            children_entropy = singleLevel.entropy(self, df)
+            result = parent_entropy - children_entropy
+            if result > 0:
+                print("valuable: " + str(result))
+            else:
+                print("ignorable: " + str(result))
+            return result
+
+        return result
+
+    def IG(self,parent_entropy,df):
+        result = 0.00
         children_entropy = singleLevel.entropy(self,df)
         result =  parent_entropy - children_entropy
         if result>0:

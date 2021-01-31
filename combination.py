@@ -17,6 +17,7 @@ class combination:
 
     def avdSD(self,df):
         # formula 3
+        a = df.std()
         return df.std() / 39
 
     def entropyandSD(self,x):
