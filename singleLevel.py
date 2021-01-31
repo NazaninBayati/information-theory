@@ -5,6 +5,18 @@ from tqdm import tqdm
 from pyitlib import discrete_random_variable as drv
 
 class singleLevel:
+
+    def IG(self,parent_entropy,df):
+
+        children_entropy = singleLevel.entropy(self,df)
+        result =  parent_entropy - children_entropy
+        if result>0:
+            print("valuable: " + str(result))
+        else:
+            print("ignorable: " + str(result))
+        return result
+
+
     def MI(self,df):
         result = 0.00
         listt = df.keys()

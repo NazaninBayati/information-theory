@@ -1,6 +1,7 @@
 from scipy import stats
 from scipy.io import arff
 import pandas as pd
+from tqdm import tqdm
 from singleLevel import *
 class combination:
 
@@ -24,9 +25,10 @@ class combination:
     """
     def IG1(self,x,y,N):
         return N*(N-1)/2*IG(x,y)
-    def IG2(self,x,y,N):
-        return IG(x,y)/notselected=1
     """
+    def IG2(self,main_entropy,key_df):
+        return singleLevel.IG(self,main_entropy,key_df)/1
+
     def P1_MIandPCC(self,df):
         return (39*38)/ (2* singleLevel.PCC_SF(self,df))
 
@@ -55,6 +57,7 @@ class combination:
         csvkey = self.csvdf.keys()
 
         main_entropy = combination.entropyandSD(self,self.df)
+        parent_entropy = singleLevel.entropy(self,self.df)
         for item in tqdm(range (self.df.keys().__len__()-1)):
             key_df = self.df
             a = self.df.keys()[item]
@@ -62,6 +65,7 @@ class combination:
             key_df.drop([self.df.keys()[item]],axis=1,inplace=True)
             entropy = combination.entropyandSD(self,key_df)
             avgSTD = combination.avdSD(self,key_df)
+            InformationGain = combination.IG2(self, parent_entropy,key_df)
             key_df[a] = b
 
 
