@@ -58,7 +58,7 @@ class combination:
         key = self.df.keys()
 
         csvkey = self.csvdf.keys()
-      
+
         main_entropy = combination.entropyandSD(self,self.df)
         parent_entropy = singleLevel.entropy(self,self.df)
         for item in tqdm(range (self.df.keys().__len__()-1)):
@@ -77,7 +77,7 @@ class combination:
             y = self.csvdf[x]
             csv_df.drop([self.csvdf.keys()[item]], axis=1, inplace=True)
             avgSTD = combination.avdSD(self, csv_df)
-            print("average STD: "+str(avgSTD))
+          #  print("average STD: "+str(avgSTD))
             Mutualinformation_SD = combination.MIandSD(self, csv_df)
             Mutualinformation_PCC1 = combination.P1_MIandPCC(self, csv_df)
             AverageMutualinofrmation = combination.avgnormalMI(self, y, csv_df)
