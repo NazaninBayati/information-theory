@@ -1,7 +1,6 @@
 from scipy import stats
 from scipy.io import arff
 import pandas as pd
-from tqdm import tqdm
 from pyitlib import discrete_random_variable as drv
 
 class singleLevel:
@@ -9,15 +8,15 @@ class singleLevel:
     def IG_SF(self,df):
 
         result = 0.00
-        listt = df.keys()
-        for item in (df):
-            children_entropy = singleLevel.entropy(self, df)
-            result = parent_entropy - children_entropy
-            if result > 0:
-                print("valuable: " + str(result))
-            else:
-                print("ignorable: " + str(result))
-            return result
+        parent_entropy = singleLevel.entropy(self,df)
+        for item in df:
+            x = item
+            y = df[item]
+            df.drop([item], axis=1, inplace=True)
+            child_entropy = singleLevel.entropy(self,df)
+            informationGain = parent_entropy - child_entropy
+            result = result + ((29*28)/(2*informationGain))
+            df[x] = y
 
         return result
 
@@ -25,10 +24,12 @@ class singleLevel:
         result = 0.00
         children_entropy = singleLevel.entropy(self,df)
         result =  parent_entropy - children_entropy
+        """
         if result>0:
             print("valuable: " + str(result))
         else:
             print("ignorable: " + str(result))
+        """
         return result
 
 
