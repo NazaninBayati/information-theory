@@ -50,13 +50,14 @@ class combination:
         self.csvdf.drop(['Result'], axis=1, inplace=True)
         return self.csvdf
 
-    def writer(self, entropy,InformationGain, avgSTD):
-        ds = [entropy, InformationGain,avgSTD]
+    def writer(self, entropy,InformationGain, avgSTD,informationgain_SF, Mutualinformation_SD, Mutualinformation_PCC1,AverageMutualinofrmation,  Mutualinformation_PCC2):
+        ds = [entropy, InformationGain,avgSTD,informationgain_SF, Mutualinformation_SD, Mutualinformation_PCC1, AverageMutualinofrmation, Mutualinformation_PCC2]
         d = {}
         for k in entropy.keys():
             d[k] = tuple(d[k] for d in ds)
         print(d)
-        pd.DataFrame.from_dict(d, orient='index', columns=['entropy','InformationGain', 'avgSTD'])
+        df = pd.DataFrame.from_dict(d, orient='index', columns=['entropy','InformationGain', 'avgSTD','informationgain_SF', 'Mutualinformation_SD', 'Mutualinformation_PCC1','AverageMutualinofrmation','Mutualinformation_PCC2'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\export_dataframe.csv', index=True, header=True)
 
     def __init__(self):
         self.df = combination.reader(self)
@@ -91,14 +92,14 @@ class combination:
             y = self.csvdf[x]
             csv_df.drop([self.csvdf.keys()[item]], axis=1, inplace=True)
             avgSTD[str(x)] = combination.avdSD(self, csv_df)
-            #informationgain_SF[str(x)] = combination.IG1(self, csv_df)
+            informationgain_SF[str(x)] = combination.IG1(self, csv_df)
           # print("average STD: "+str(avgSTD))
-           # Mutualinformation_SD[str(x)] = combination.MIandSD(self, csv_df)
-           # Mutualinformation_PCC1[str(x)] = combination.P1_MIandPCC(self, csv_df)
-           # AverageMutualinofrmation[str(x)] = combination.avgnormalMI(self, y, csv_df)
-            #Mutualinformation_PCC2[str(x)] = combination.P2_MIandPCC(self,  y, csv_df)
+            Mutualinformation_SD[str(x)] = combination.MIandSD(self, csv_df)
+            Mutualinformation_PCC1[str(x)] = combination.P1_MIandPCC(self, csv_df)
+            AverageMutualinofrmation[str(x)] = combination.avgnormalMI(self, y, csv_df)
+            Mutualinformation_PCC2[str(x)] = combination.P2_MIandPCC(self,  y, csv_df)
             csv_df[x] = y
-        combination.writer(self, entropy, InformationGain,avgSTD)
+        combination.writer(self, entropy, InformationGain,avgSTD,informationgain_SF,Mutualinformation_SD, Mutualinformation_PCC1, AverageMutualinofrmation,  Mutualinformation_PCC2)
 
 
 p = combination()
