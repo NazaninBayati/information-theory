@@ -23,10 +23,10 @@ class combination:
     def entropyandSD(self,x):
         # formula 4
         return singleLevel.entropy(self,x)/29
-    """
-    def IG1(self,x,y,N):
-        return N*(N-1)/2*IG(x,y)
-    """
+
+    def IG1(self,df):
+        return singleLevel.IG_SF(self,df)
+
     def IG2(self,main_entropy,key_df):
         return singleLevel.IG(self,main_entropy,key_df)/1
 
@@ -50,39 +50,54 @@ class combination:
         self.csvdf.drop(['Result'], axis=1, inplace=True)
         return self.csvdf
 
+    def writer(self, entropy,InformationGain, str1, str2):
+        a = pd.DataFrame.from_dict(entropy, orient='index', columns=[str1])
+        b = pd.DataFrame.from_dict(InformationGain, orient='index', columns=[str2])
+       # b = pd.DataFrame.from_dict(InformationGain, orient='index', columns=[str2])
+        print(b)
+      #  print(pd.DataFrame.from_dict(data, orient='index', columns=[str]))
+
     def __init__(self):
-        features = {}
         self.df = combination.reader(self)
         self.csvdf = combination.csvreader(self)
         #for loop for each feature
-        key = self.df.keys()
+        entropy={}
+        InformationGain = {}
+        avgSTD = {}
+        informationgain_SF = {}
+        Mutualinformation_SD = {}
+        Mutualinformation_PCC1 = {}
+        AverageMutualinofrmation = {}
+        Mutualinformation_PCC2 = {}
 
         csvkey = self.csvdf.keys()
-
-        main_entropy = combination.entropyandSD(self,self.df)
         parent_entropy = singleLevel.entropy(self,self.df)
         for item in tqdm(range (self.df.keys().__len__()-1)):
             key_df = self.df
             a = self.df.keys()[item]
             b = self.df[a]
             key_df.drop([self.df.keys()[item]],axis=1,inplace=True)
-            entropy = combination.entropyandSD(self,key_df)
-            InformationGain = combination.IG2(self, parent_entropy,key_df)
+            entropy[str(a)] = combination.entropyandSD(self,key_df)
+            InformationGain[str(a)] = combination.IG2(self, parent_entropy,key_df)
             key_df[a] = b
 
+
+        combination.writer(self, entropy,InformationGain, 'Entropy', "Information gain")
 
         for item in tqdm(range(csvkey.__len__()-1)):
             csv_df = self.csvdf
             x = self.csvdf.keys()[item]
             y = self.csvdf[x]
             csv_df.drop([self.csvdf.keys()[item]], axis=1, inplace=True)
-            avgSTD = combination.avdSD(self, csv_df)
-          #  print("average STD: "+str(avgSTD))
-            Mutualinformation_SD = combination.MIandSD(self, csv_df)
-            Mutualinformation_PCC1 = combination.P1_MIandPCC(self, csv_df)
-            AverageMutualinofrmation = combination.avgnormalMI(self, y, csv_df)
-            Mutualinformation_PCC2 = combination.P2_MIandPCC(self,  y, csv_df)
+            avgSTD[str(x)] = combination.avdSD(self, csv_df)
+            informationgain_SF[str(x)] = combination.IG1(self, csv_df)
+          # print("average STD: "+str(avgSTD))
+            Mutualinformation_SD[str(x)] = combination.MIandSD(self, csv_df)
+            Mutualinformation_PCC1[str(x)] = combination.P1_MIandPCC(self, csv_df)
+            AverageMutualinofrmation[str(x)] = combination.avgnormalMI(self, y, csv_df)
+            Mutualinformation_PCC2[str(x)] = combination.P2_MIandPCC(self,  y, csv_df)
             csv_df[x] = y
+
 
 
 p = combination()
