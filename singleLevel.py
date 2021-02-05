@@ -108,6 +108,48 @@ class singleLevel:
             result = result + sum(stats.pearsonr(X, Y))
         return result
 
+    def kendall_SF(self, df):
+
+        result = 0.00
+        listt = df.keys()
+        for item in (df):
+            j = 1
+            for i in listt[j:listt.__len__() - 1]:
+                X = df[item].values
+                Y = df[i].values
+                result = result + sum(stats.kendalltau(X, Y))
+        return result
+
+    def kendall(self, NS_item, df):
+        result = 0.00
+
+        for item in df:
+            X = NS_item.values
+            Y = df[item].values
+            result = result + sum(stats.kendalltau(X, Y))
+        return result
+
+    def spearsman_SF(self, df):
+
+        result = 0.00
+        listt = df.keys()
+        for item in (df):
+            j = 1
+            for i in listt[j:listt.__len__() - 1]:
+                X = df[item].values
+                Y = df[i].values
+                result = result + sum(stats.spearmanr(X, Y))
+        return result
+
+    def spearsman(self, NS_item, df):
+        result = 0.00
+
+        for item in df:
+            X = NS_item.values
+            Y = df[item].values
+            result = result + sum(stats.spearmanr(X, Y))
+        return result
+
     def entropy(self,df):
 
         i = 1
