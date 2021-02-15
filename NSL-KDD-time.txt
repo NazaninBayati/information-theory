@@ -1,0 +1,36 @@
+
+  Mutualinformation_PCC2 Execution time: 
+100%|██████████| 30/30 [00:00<00:00, 91.45it/s]
+
+  Entropy Execution time: 
+100%|██████████| 30/30 [00:01<00:00, 25.95it/s]
+  0%|          | 0/30 [00:00<?, ?it/s]
+  InformationGain Execution time: 
+100%|██████████| 30/30 [00:01<00:00, 25.61it/s]
+  0%|          | 0/30 [00:00<?, ?it/s]
+  avgSTD Execution time: 
+100%|██████████| 30/30 [00:00<00:00, 128.03it/s]
+  0%|          | 0/30 [00:00<?, ?it/s]
+  informationgain_SF Execution time: 
+100%|██████████| 30/30 [00:16<00:00,  1.79it/s]
+
+  Mutualinformation_SD Execution time: 
+100%|██████████| 30/30 [06:39<00:00, 13.32s/it]
+
+  Mutualinformation_PCC1 Execution time: 
+100%|██████████| 30/30 [00:05<00:00,  5.89it/s]
+
+  AverageMutualinofrmation Execution time: 
+100%|██████████| 30/30 [00:14<00:00,  2.03it/s]
+
+  Mutualinformation_Kendall1 Execution time: 
+100%|██████████| 30/30 [00:19<00:00,  1.55it/s]
+
+  Mutualinformation_Kendall2 Execution time: 
+100%|██████████| 30/30 [00:00<00:00, 34.55it/s]
+  0%|          | 0/30 [00:00<?, ?it/s]
+  Mutualinformation_Spearsman1 Execution time: 
+100%|██████████| 30/30 [00:28<00:00,  1.06it/s]
+  0%|          | 0/30 [00:00<?, ?it/s]
+  Mutualinformation_Spearsman2 Execution time: 
+100%|██████████| 30/30 [00:01<00:00, 25.46it/s]
