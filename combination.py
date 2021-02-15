@@ -96,17 +96,40 @@ class combination:
 
         csvkey = self.csvdf.keys()
         parent_entropy = singleLevel.entropy(self, self.df)
+        num = (csvkey.__len__() - 1)
+
+        informationgain_SF['main'] = combination.IG1(self, self.csvdf, num + 1)
+        print("\n \033[1;31;40m informationgain_SF Execution time: ")
+        csv_df = self.csvdf
+        for item in tqdm(range(csvkey.__len__())):
+            x = self.csvdf.keys()[0]
+            y = self.csvdf[x]
+            csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
+            informationgain_SF[str(x)] = combination.IG1(self, csv_df, num)
+            print("I am working++")
+            print("I am working----")
+            csv_df[x] = y
 
         Mutualinformation_PCC2['main'] = "None"
         print("\n \033[1;31;40m Mutualinformation_PCC2 Execution time: ")
         csv_df = self.csvdf
-        num = (csvkey.__len__()-1)
+
         for item in tqdm(range(csvkey.__len__())):
 
             x = self.csvdf.keys()[0]
             y = self.csvdf[x]
             csv_df.drop([csv_df.keys()[0]], axis=1, inplace=True)
             Mutualinformation_PCC2[str(x)] = combination.P2_MIandPCC(self, y, csv_df)
+            csv_df[x] = y
+
+        avgSTD['main'] = combination.avdSD(self, self.csvdf, num + 1)
+        print("\n \033[1;31;40m avgSTD Execution time: ")
+        csv_df = self.csvdf
+        for item in tqdm(range(csvkey.__len__())):
+            x = self.csvdf.keys()[0]
+            y = self.csvdf[x]
+            csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
+            avgSTD[str(x)] = combination.avdSD(self, csv_df, num)
             csv_df[x] = y
 
         entropy['main'] = combination.entropyandSD(self, self.df, num+1)
@@ -131,16 +154,7 @@ class combination:
             InformationGain[str(a)] = combination.IG2(self, parent_entropy, key_df)
             key_df[a] = b
 
-        avgSTD['main'] = combination.avdSD(self, self.csvdf, num+1)
-        print("\n \033[1;31;40m avgSTD Execution time: ")
-        csv_df = self.csvdf
-        for item in tqdm(range(csvkey.__len__())):
 
-            x = self.csvdf.keys()[0]
-            y = self.csvdf[x]
-            csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
-            avgSTD[str(x)] = combination.avdSD(self, csv_df, num)
-            csv_df[x] = y
 
         informationgain_SF['main'] = combination.IG1(self, self.csvdf, num+1)
         print("\n \033[1;31;40m informationgain_SF Execution time: ")

@@ -16,6 +16,7 @@ class singleLevel:
             child_entropy = singleLevel.entropy(self,df)
             informationGain = parent_entropy - child_entropy
             result = result + ((num * (num-1))/(2*informationGain))
+
             df[x] = y
 
         return result
