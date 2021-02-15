@@ -5,7 +5,7 @@ from pyitlib import discrete_random_variable as drv
 
 class singleLevel:
 
-    def IG_SF(self,df):
+    def IG_SF(self,df, num):
 
         result = 0.00
         parent_entropy = singleLevel.entropy(self,df)
@@ -15,7 +15,7 @@ class singleLevel:
             df.drop([item], axis=1, inplace=True)
             child_entropy = singleLevel.entropy(self,df)
             informationGain = parent_entropy - child_entropy
-            result = result + ((29*28)/(2*informationGain))
+            result = result + ((num * (num-1))/(2*informationGain))
             df[x] = y
 
         return result
