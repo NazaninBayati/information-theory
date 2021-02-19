@@ -41,7 +41,7 @@ class singleLevel:
             j = 1
             for i in listt[j:listt.__len__() - 1]:
 
-                """
+
                 data1 = df[item]
                 data2 = df[i]
                 pd_series_H1 = pd.Series(data1)
@@ -56,10 +56,10 @@ class singleLevel:
                 result = result + entropy_H1 + entropy_H2 - entropy
                 # print(dictionary[str([item,i])] )
                 j = j + 1
-                """
+
                 X = df[item].values
                 Y = df[i].values
-                result = result + drv.information_mutual(X, Y)
+                #result = result + drv.information_mutual(int(X), int(Y))
         return result
 
     def notselectedMI(self,NS_item,df):
