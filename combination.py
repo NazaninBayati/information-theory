@@ -76,7 +76,7 @@ class combination:
             d[k] = tuple(d[k] for d in ds)
         print(d)
         df = pd.DataFrame.from_dict(d, orient='index', columns=['entropy','InformationGain', 'avgSTD',  'Mutualinformation_PCC1','Mutualinformation_PCC2','Mutualinformation_kendall1','Mutualinformation_kendall2','Mutualinformation_spearsman1','Mutualinformation_spearsman2'])
-        df.to_csv(r'C:\Users\nazanin\Documents\GitHub\information-theory\staDynBenignLab_export_dataframe.csv', index=True, header=True)
+        df.to_csv(r'C:\Users\nazanin\Documents\GitHub\information-theory\LDAP_export_dataframe.csv', index=True, header=True)
 
     def __init__(self):
         self.df = combination.reader(self)
