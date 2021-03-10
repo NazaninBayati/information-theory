@@ -1,0 +1,82 @@
+,informationgain_SF
+main,1.593617493156743e+18
+ Source Port,inf
+ Destination Port,-1.300836604855383e+18
+ Protocol,inf
+ Flow Duration,inf
+ Total Fwd Packets,inf
+ Total Backward Packets,inf
+Total Length of Fwd Packets,inf
+ Total Length of Bwd Packets,inf
+ Fwd Packet Length Max,inf
+ Fwd Packet Length Min,inf
+ Fwd Packet Length Mean,inf
+ Fwd Packet Length Std,inf
+Bwd Packet Length Max,inf
+ Bwd Packet Length Min,-2.0596579576953556e+18
+ Bwd Packet Length Mean,inf
+ Bwd Packet Length Std,inf
+ Flow Packets/s,inf
+ Flow IAT Mean,inf
+ Flow IAT Std,inf
+ Flow IAT Max,inf
+ Flow IAT Min,inf
+Fwd IAT Total,inf
+ Fwd IAT Mean,inf
+ Fwd IAT Std,inf
+ Fwd IAT Max,inf
+ Fwd IAT Min,inf
+Bwd IAT Total,inf
+ Bwd IAT Mean,inf
+ Bwd IAT Std,inf
+ Bwd IAT Max,inf
+ Bwd IAT Min,inf
+Fwd PSH Flags,inf
+ Bwd PSH Flags,inf
+ Fwd URG Flags,inf
+ Bwd URG Flags,inf
+ Fwd Header Length,inf
+ Bwd Header Length,inf
+Fwd Packets/s,inf
+ Bwd Packets/s,inf
+ Min Packet Length,inf
+ Max Packet Length,inf
+ Packet Length Mean,inf
+ Packet Length Std,inf
+ Packet Length Variance,inf
+FIN Flag Count,inf
+ SYN Flag Count,inf
+ RST Flag Count,inf
+ PSH Flag Count,inf
+ ACK Flag Count,inf
+ URG Flag Count,inf
+ CWE Flag Count,inf
+ ECE Flag Count,inf
+ Down/Up Ratio,inf
+ Average Packet Size,inf
+ Avg Fwd Segment Size,inf
+ Avg Bwd Segment Size,inf
+ Fwd Header Length.1,inf
+Fwd Avg Bytes/Bulk,inf
+ Fwd Avg Packets/Bulk,inf
+ Fwd Avg Bulk Rate,inf
+ Bwd Avg Bytes/Bulk,inf
+ Bwd Avg Packets/Bulk,inf
+Bwd Avg Bulk Rate,inf
+Subflow Fwd Packets,inf
+ Subflow Fwd Bytes,inf
+ Subflow Bwd Packets,inf
+ Subflow Bwd Bytes,inf
+Init_Win_bytes_forward,inf
+ Init_Win_bytes_backward,inf
+ act_data_pkt_fwd,inf
+ min_seg_size_forward,inf
+Active Mean,inf
+ Active Std,inf
+ Active Max,inf
+ Active Min,inf
+Idle Mean,inf
+ Idle Std,inf
+ Idle Max,inf
+ Idle Min,1.3369709550162007e+18
+ Inbound,1.5537770558277284e+18

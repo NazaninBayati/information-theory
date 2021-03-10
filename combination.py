@@ -76,7 +76,7 @@ class combination:
             d[k] = tuple(d[k] for d in ds)
         print(d)
         df = pd.DataFrame.from_dict(d, orient='index', columns=['entropy','InformationGain', 'avgSTD',  'Mutualinformation_PCC1','Mutualinformation_PCC2','Mutualinformation_kendall1','Mutualinformation_kendall2','Mutualinformation_spearsman1','Mutualinformation_spearsman2'])
-        df.to_csv(r'C:\Users\nazanin\Documents\GitHub\information-theory\staDynBenignLab_export_dataframe.csv', index=True, header=True)
+        df.to_csv(r'C:\Users\nazanin\Documents\GitHub\information-theory\LDAP_export_dataframe.csv', index=True, header=True)
 
     def __init__(self):
         self.df = combination.reader(self)
@@ -99,7 +99,32 @@ class combination:
         parent_entropy = singleLevel.entropy(self, self.df)
         num = (csvkey.__len__() - 1)
 
+        entropy['main'] = combination.entropyandSD(self, self.df, num + 1)
+        print("\n \033[1;31;40m Entropy Execution time: ")
+        key_df = self.df
+        for item in tqdm(range(self.df.keys().__len__())):
+            a = self.df.keys()[0]
+            b = self.df[a]
+            key_df.drop([key_df.keys()[0]], axis=1, inplace=True)
+            entropy[str(a)] = combination.entropyandSD(self, key_df, num)
+            # InformationGain[str(a)] = combination.IG2(self, parent_entropy,key_df)
+            key_df[a] = b
+        df = pd.DataFrame.from_dict(entropy, orient='index', columns=['entropy'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\entropy.csv', index=True, header=True)
 
+        informationgain_SF['main'] = combination.IG1(self, self.csvdf, num + 1)
+        print("\n \033[1;31;40m informationgain_SF Execution time: ")
+        csv_df = self.csvdf
+        for item in tqdm(range(csvkey.__len__())):
+            x = self.csvdf.keys()[0]
+            y = self.csvdf[x]
+            csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
+            informationgain_SF[str(x)] = combination.IG1(self, csv_df, num)
+            print("I am working++")
+            print("I am working----")
+            csv_df[x] = y
+        df = pd.DataFrame.from_dict(informationgain_SF, orient='index', columns=['informationgain_SF'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\informationgain_SF.csv', index=True, header=True)
 
         """
         Mutualinformation_SD['main'] = combination.MIandSD(self, self.csvdf, num + 1)
@@ -124,6 +149,11 @@ class combination:
             Mutualinformation_PCC2[str(x)] = combination.P2_MIandPCC(self, y, csv_df)
             csv_df[x] = y
 
+        df = pd.DataFrame.from_dict(Mutualinformation_PCC2, orient='index', columns=['Mutualinformation_PCC2'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\Mutualinformation_PCC2.csv', index=True, header=True)
+
+
+
         avgSTD['main'] = combination.avdSD(self, self.csvdf, num + 1)
         print("\n \033[1;31;40m avgSTD Execution time: ")
         csv_df = self.csvdf
@@ -133,18 +163,8 @@ class combination:
             csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
             avgSTD[str(x)] = combination.avdSD(self, csv_df, num)
             csv_df[x] = y
-
-        entropy['main'] = combination.entropyandSD(self, self.df, num+1)
-        print("\n \033[1;31;40m Entropy Execution time: ")
-        key_df = self.df
-        for item in tqdm(range (self.df.keys().__len__())):
-
-            a = self.df.keys()[0]
-            b = self.df[a]
-            key_df.drop([key_df.keys()[0]],axis=1,inplace=True)
-            entropy[str(a)] = combination.entropyandSD(self,key_df, num)
-            #InformationGain[str(a)] = combination.IG2(self, parent_entropy,key_df)
-            key_df[a] = b
+        df = pd.DataFrame.from_dict(avgSTD, orient='index', columns=['avgSTD'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\avgSTD.csv', index=True, header=True)
 
         InformationGain['main'] = combination.IG2(self, parent_entropy, self.df)
         print("\n \033[1;31;40m InformationGain Execution time: ")
@@ -156,20 +176,8 @@ class combination:
             InformationGain[str(a)] = combination.IG2(self, parent_entropy, key_df)
             key_df[a] = b
 
-
-
-        informationgain_SF['main'] = combination.IG1(self, self.csvdf, num+1)
-        print("\n \033[1;31;40m informationgain_SF Execution time: ")
-        csv_df = self.csvdf
-        for item in tqdm(range(csvkey.__len__())):
-            x = self.csvdf.keys()[0]
-            y = self.csvdf[x]
-            csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
-            informationgain_SF[str(x)] = ""
-            #combination.IG1(self, csv_df, num)
-            csv_df[x] = y
-
-
+        df = pd.DataFrame.from_dict( InformationGain, orient='index', columns=[' InformationGain'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\InformationGain.csv', index=True, header=True)
 
         Mutualinformation_PCC1['main'] = combination.P1_MIandPCC(self, self.csvdf, num+1)
         print("\n \033[1;31;40m Mutualinformation_PCC1 Execution time: ")
@@ -182,6 +190,9 @@ class combination:
             Mutualinformation_PCC1[str(x)] = combination.P1_MIandPCC(self, csv_df, num)
             csv_df[x] = y
 
+        df = pd.DataFrame.from_dict(Mutualinformation_PCC1, orient='index', columns=['Mutualinformation_PCC1'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\Mutualinformation_PCC1.csv', index=True, header=True)
+
         """
         AverageMutualinofrmation['main'] = "None"
         print("\n \033[1;31;40m AverageMutualinofrmation Execution time: ")
@@ -193,7 +204,14 @@ class combination:
             csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
             AverageMutualinofrmation[str(x)] = combination.avgnormalMI(self, y, csv_df)
             csv_df[x] = y
+        
+        df = pd.DataFrame.from_dict( AverageMutualinofrmation, orient='index', columns=['AverageMutualinofrmation'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\AverageMutualinofrmation.csv', index=True,
+                  header=True)
         """
+
+
+
         Mutualinformation_kendall1['main'] = combination.P1_MIandKendall(self, self.csvdf, num+1)
         print("\n \033[1;31;40m Mutualinformation_Kendall1 Execution time: ")
         csv_df = self.csvdf
@@ -203,6 +221,9 @@ class combination:
             csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
             Mutualinformation_kendall1[str(x)] = combination.P1_MIandKendall(self, csv_df, num)
             csv_df[x] = y
+
+        df = pd.DataFrame.from_dict( Mutualinformation_kendall1, orient='index', columns=['Mutualinformation_kendall1'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\Mutualinformation_kendall1.csv', index=True, header=True)
 
         Mutualinformation_kendall2['main'] = "None"
         print("\n \033[1;31;40m Mutualinformation_Kendall2 Execution time: ")
@@ -214,6 +235,10 @@ class combination:
             Mutualinformation_kendall2[str(x)] = combination.P2_MIandKendall(self, y, csv_df)
             csv_df[x] = y
 
+        df = pd.DataFrame.from_dict(Mutualinformation_kendall2, orient='index', columns=['Mutualinformation_kendall2'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\Mutualinformation_kendall2.csv', index=True,
+                  header=True)
+
         Mutualinformation_spearsman1['main'] = combination.P1_MIandSpearsman(self, self.csvdf, num+1)
         print("\n \033[1;31;40m Mutualinformation_Spearsman1 Execution time: ")
         csv_df = self.csvdf
@@ -223,6 +248,9 @@ class combination:
             csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
             Mutualinformation_spearsman1[str(x)] = combination.P1_MIandSpearsman(self, csv_df, num)
             csv_df[x] = y
+
+        df = pd.DataFrame.from_dict(Mutualinformation_spearsman1, orient='index', columns=['Mutualinformation_spearsman1'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\Mutualinformation_spearsman1.csv', index=True, header=True)
 
         Mutualinformation_spearsman2['main'] = "None"
         print("\n \033[1;31;40m Mutualinformation_Spearsman2 Execution time: ")
@@ -234,21 +262,12 @@ class combination:
             Mutualinformation_spearsman2[str(x)] = combination.P2_MIandSpearsman(self, y, csv_df)
             csv_df[x] = y
 
+        df = pd.DataFrame.from_dict( Mutualinformation_spearsman2, orient='index',
+                                    columns=[' Mutualinformation_spearsman2'])
+        df.to_csv(r'C:\Users\Lion\Documents\GitHub\information-theory\ Mutualinformation_spearsman2.csv', index=True,
+                  header=True)
 
-        informationgain_SF['main'] = combination.IG1(self, self.csvdf, num + 1)
-        print("\n \033[1;31;40m informationgain_SF Execution time: ")
-        csv_df = self.csvdf
-        for item in tqdm(range(csvkey.__len__())):
-            x = self.csvdf.keys()[0]
-            y = self.csvdf[x]
-            csv_df.drop([self.csvdf.keys()[0]], axis=1, inplace=True)
-            informationgain_SF[str(x)] = ""
-            #combination.IG1(self, csv_df, num)
-            print("I am working++")
-            print("I am working----")
-            csv_df[x] = y
-
-        combination.writer(self, entropy, InformationGain,avgSTD, Mutualinformation_PCC1,   Mutualinformation_PCC2, Mutualinformation_kendall1,Mutualinformation_kendall2,Mutualinformation_spearsman1,Mutualinformation_spearsman2)
+        #combination.writer(self, entropy, InformationGain,avgSTD, Mutualinformation_PCC1,   Mutualinformation_PCC2, Mutualinformation_kendall1,Mutualinformation_kendall2,Mutualinformation_spearsman1,Mutualinformation_spearsman2)
 
 
 p = combination()
